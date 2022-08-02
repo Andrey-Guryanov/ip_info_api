@@ -14,7 +14,7 @@ services:
       - 8080:8080
     restart: always
     volumes:
-      - C:/logs:/api_whois/logs/
+      - /var/git_projects/ip_info_api/logs:/api_whois/logs/
     depends_on:
       - mongodb_container
     dns:

@@ -24,26 +24,3 @@ print(get_information('193.170.79.0t'))
 print(get_information('193.170.79.1'))
 print(get_information('192.168.79.1'))
 print(time.time() - time_start)
-# #
-#
-# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# s.settimeout(5)
-#
-# s.connect(('whois.apnic.net', 43))
-#
-# s.send((bytes('1.2.128.0', 'utf-8')) + b'\r\n')
-#
-# msg = ''
-# while len(msg) < 10000:
-#     receive_data = str((s.recv(100)), encoding='utf-8')
-#     if (receive_data == ''):
-#         break
-#     msg = msg + receive_data
-
-# print(msg)
-# #
-# # {org: { $regex: 'APNIC'}}
-# # {netname: { $regex: 'APNIC'}}
-
-# {descr: { $regex: 'APNIC'}}
-# {netname: 'APNIC-203'}

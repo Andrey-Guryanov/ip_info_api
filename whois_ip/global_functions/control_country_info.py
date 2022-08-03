@@ -4,12 +4,14 @@ from dotenv import load_dotenv
 from whois_ip.apps.sys import settings_load
 from whois_ip.apps.sys import csv_read_dict
 from whois_ip.custom_class.mongo_db import Mongo_db
+from log_app.custom_logger import logger
 
 ENV = load_dotenv()
 SETTINGS = settings_load()
 PATH_FILE_COUNTRY_CODE = Path.cwd() / 'whois_ip' / 'local_files' / 'country_code.csv'
 
 if SETTINGS['mongo_cache']:
+    logger.debug(f'mongo_cache = True')
     CONNECT_MONGO_COUNTRY = Mongo_db(
         {'MONGO_HOST': os.getenv("MONGO_HOST"),
          'MONGO_PORT': int(os.getenv("MONGO_PORT"))},
@@ -17,8 +19,7 @@ if SETTINGS['mongo_cache']:
         'catalog_country_code')
 
     if not CONNECT_MONGO_COUNTRY.check_coll('catalog_country_code'):
-        print(PATH_FILE_COUNTRY_CODE)
-        print('*****************************')
+        logger.debug(f'start not catalog_country_code - {PATH_FILE_COUNTRY_CODE} ')
         db_write_chunk = csv_read_dict(PATH_FILE_COUNTRY_CODE)
         CONNECT_MONGO_COUNTRY.insert_many(db_write_chunk)
         CONNECT_MONGO_COUNTRY.create_index('ALPHA2')

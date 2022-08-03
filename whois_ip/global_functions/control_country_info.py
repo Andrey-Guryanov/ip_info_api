@@ -17,6 +17,8 @@ if SETTINGS['mongo_cache']:
         'catalog_country_code')
 
     if not CONNECT_MONGO_COUNTRY.check_coll('catalog_country_code'):
+        print(PATH_FILE_COUNTRY_CODE)
+        print('*****************************')
         db_write_chunk = csv_read_dict(PATH_FILE_COUNTRY_CODE)
         CONNECT_MONGO_COUNTRY.insert_many(db_write_chunk)
         CONNECT_MONGO_COUNTRY.create_index('ALPHA2')
